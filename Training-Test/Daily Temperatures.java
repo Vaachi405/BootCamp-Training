@@ -1,0 +1,15 @@
+public static int[] dailyTemperatures(int[] temperatures) {
+    int n = temperatures.length;
+    int[] res = new int[n];
+    Deque<Integer> stack = new ArrayDeque<>(); // stores indices
+
+    for (int i = 0; i < n; i++) {
+        while (!stack.isEmpty() && temperatures[stack.peek()] < temperatures[i]) {
+            int prevIndex = stack.pop();
+            res[prevIndex] = i - prevIndex;
+        }
+        stack.push(i);
+    }
+
+    return res;
+}
